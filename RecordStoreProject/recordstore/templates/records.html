@@ -1,0 +1,15 @@
+{%  extends 'master.html' %}
+
+{% block title %}
+    Records
+{% endblock %}
+
+{%  block content %}
+    <div class="list-group">
+        {% for record in records %}
+            <a class="list-group-item list-group-item-action" href="{% url 'recordstore:records  record.id' %}">
+                {{ record.title }}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
