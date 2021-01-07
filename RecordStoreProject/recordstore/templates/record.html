@@ -4,24 +4,31 @@
 
     <div class="card">
         <div class="card-header">
-            <h1>
-                {{ record.name }}
+            <h3>
                 {% if perms.records.change_record %}
                     <a href="{% url 'recordstore:edit' record.id %}">
                         <span class="badge badge-primary">Edit</span>
                     </a>
+                    <a href="{% url 'recordstore:delete' record.id %}">
+                        <span class="badge badge-danger">Delete</span>
+                    </a>
+                {% else %}
+                    <a href="{% url 'recordstore:add_wish' record.id %}">
+                        <span class="badge badge-secondary">Add to wishlist</span>
+                    </a>
                 {% endif %}
+            </h3>
+            <br>
+            <img src="{{ record.image }}" width="300" height="300">
+            <h1>
+                {{ record.title }}
             </h1>
         </div>
         <div class="card-body">
             <blockquote class="blockquote mb-0">
-                <p>{{ record.name }}</p>
-                <footer class="blockquote-footer">
-                    Author:
-                    <cite title="Source Title">
-                        {{ record.user.username }}
-                    </cite>
-                </footer>
+                <p>Artist : {{ record.artist }}</p>
+                <p>Genre : {{ record.genre }}</p>
+                <p>Year : {{ record.year }}</p>
             </blockquote>
         </div>
     </div>

@@ -2,22 +2,35 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'recordstore:records' %}">
-        <img src="{% static 'img/rocket.png' %}" width="30" height="30" class="d-inline-block align-top" alt="logo"/>
+        <img src="{% static 'img/vinyl.png' %}" width="30" height="30" class="d-inline-block align-top" alt="logo"/>
         Record Store
     </a>
 
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            {% if not perms.demo_app.add_article %}
-                <a class="nav-link disabled" href="{% url 'recordstore:records' %}">New article</a>
+            {% if not perms.recordstore.add_record %}
+                <a class="nav-link disabled" href="{% url 'recordstore:new' %}">New record</a>
             {% else %}
-                <a class="nav-link" href="{% url 'recordstore:new' %}">New article</a>
+                <a class="nav-link" href="{% url 'recordstore:new' %}">New record</a>
             {% endif %}
         </li>
+
+        <li class="nav-item">
+            {% if perms.recordstore.add_record %}
+                <a class="nav-link disabled" href="{% url 'recordstore:wishlist' %}">Wishlist</a>
+            {% else %}
+                <a class="nav-link" href="{% url 'recordstore:wishlist' %}">Wishlist</a>
+            {% endif %}
+        </li>
+        {#        <li>#}
+        {#            <a class="nav-link" href="{% url 'recordstore:wishlist' %}">Wishlist</a>#}
+        {#        </li>#}
     </ul>
 
     {% if user.is_authenticated %}
         <a class="nav-link" href="{% url 'logout' %}">Logout {{ user.get_username }}</a>
+    {% else %}
+        <a class="nav-link" href="{% url 'recordstore:register' %}">Register</a>
     {% endif %}
 
 </nav>

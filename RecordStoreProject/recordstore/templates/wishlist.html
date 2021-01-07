@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    Wishlist
+{% endblock %}
+
+{% block content %}
+    <div class="list-group">
+        {% if not records %}
+            <h4>Wishlist is empty.</h4>
+        {% endif %}
+        {% for record in records %}
+            <a class="list-group-item list-group-item-action" href="{% url 'recordstore:record' record.record.id %}">
+                <h4>{{ forloop.counter }}.</h4>
+                <hr>
+                <img src="{{ record.record.image }}" width="150" height="150">
+                <hr>
+                <h5>{{ record.record.title }}</h5>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

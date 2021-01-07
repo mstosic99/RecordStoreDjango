@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class RecordstoreConfig(AppConfig):
+class DemoAppConfig(AppConfig):
     name = 'recordstore'
