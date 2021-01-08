@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import netifaces
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -25,8 +26,19 @@ SECRET_KEY = 'll2=1k%vn3_mw_p^dck5#ci)viu!&v(4q%m_!s_2l^_5jjb^wi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
+def ipaddresses():
+    iplist = []
+    for interface in netifaces.interfaces():
+        addrs = netifaces.ifaddresses(interface)
+        for x in (netifaces.AF_INET, netifaces.AF_INET6):
+            if x in addrs:
+                iplist.append(addrs[x][0]['addr'])
+    return iplist
+
+
+ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS += ipaddresses()
 
 # Application definition
 
@@ -71,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'RecordStoreProject.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -105,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -118,7 +128,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

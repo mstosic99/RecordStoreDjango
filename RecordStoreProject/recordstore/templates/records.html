@@ -8,11 +8,11 @@
     <div class="list-group">
         {% for record in records %}
             <a class="list-group-item list-group-item-action" href="{% url 'recordstore:record' record.id %}">
-                <h4>{{ forloop.counter }}.</h4>
+                <h3>{{ forloop.counter }}.</h3>
                 <hr>
-                <img src="{{ record.image }}" width="150" height="150">
+                <img src="{{ record.image }}" width="200" height="200">
                 <hr>
-                <h5>{{ record.title }}</h5>
+                <h3>{{ record.title }}</h3>
             </a>
         {% endfor %}
     </div>
