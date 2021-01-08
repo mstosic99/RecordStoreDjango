@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'll2=1k%vn3_mw_p^dck5#ci)viu!&v(4q%m_!s_2l^_5jjb^wi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 def ipaddresses():
